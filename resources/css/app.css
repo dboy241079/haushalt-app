@@ -1,0 +1,319 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+@layer components {
+    .app-main {
+        @apply space-y-5 px-4 pb-28 pt-10;
+    }
+}
+
+@layer components {
+    .fc {
+        @apply text-sm text-slate-800;
+    }
+
+    .fc .fc-toolbar {
+        @apply mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .fc .fc-toolbar-title {
+        @apply text-lg font-bold text-slate-900;
+    }
+
+    .fc .fc-button {
+        @apply rounded-xl border-0 bg-slate-900 px-3 py-2 text-xs font-semibold text-white shadow-none;
+    }
+
+    .fc .fc-button:hover {
+        @apply bg-slate-800;
+    }
+
+    .fc .fc-button:disabled {
+        @apply bg-slate-300 text-slate-500;
+    }
+
+    .fc .fc-col-header-cell-cushion {
+        @apply py-2 text-xs font-semibold text-slate-600 no-underline;
+    }
+
+    .fc .fc-daygrid-day-number {
+        @apply p-2 text-sm font-semibold text-slate-700 no-underline;
+    }
+
+    .fc .fc-day-today {
+        background-color: rgb(245 243 255) !important;
+    }
+
+    .fc .fc-event {
+        @apply rounded-lg border-0 bg-violet-500 px-1 py-0.5 text-[11px] font-medium text-white;
+    }
+
+    .fc .fc-daygrid-event-dot {
+        display: none;
+    }
+}
+@layer components {
+    .fc .fc-event {
+        @apply rounded-lg border-0 px-1 py-0.5 text-[11px] font-semibold;
+    }
+
+    .fc .fc-daygrid-event {
+        @apply shadow-sm;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* iOS / Safari saubere Höhe + Safe Areas */
+html {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100%;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* App-Hülle */
+.app-shell {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Hauptinhalt mit Platz für feste Bottom-Nav + iPhone Home-Bar */
+.app-main {
+    padding: 1rem;
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+}
+
+/* Feste Navigation iOS-safe */
+.bottom-safe-nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* Hero oben nicht in Notch drücken */
+.top-safe-area {
+    padding-top: calc(1.25rem + env(safe-area-inset-top));
+}
+
+/* Karten / Klickflächen auf iPhone angenehmer */
+.ios-touch-target {
+    min-height: 44px;
+}
+
+/* Verhindert unschöne Zooms bei Inputs auf iOS */
+@media (max-width: 768px) {
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 16px;
+    }
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        overscroll-behavior-y: none;
+        -webkit-tap-highlight-color: transparent;
+        background: #020617;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+}
+
+@layer components {
+    .app-shell {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background:
+            radial-gradient(circle at top right, rgba(56, 189, 248, 0.10), transparent 28%),
+            radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.08), transparent 24%),
+            #f1f5f9;
+        box-shadow:
+            0 0 0 1px rgba(255,255,255,0.05),
+            0 24px 60px rgba(15, 23, 42, 0.28);
+    }
+
+    .top-safe-area {
+        padding-top: calc(env(safe-area-inset-top) + 1rem);
+    }
+
+    .app-main {
+        padding: 1rem;
+        padding-bottom: calc(env(safe-area-inset-bottom) + 7.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .ios-card {
+        @apply rounded-[30px] border border-white/60 bg-white/85 shadow-sm ring-1 ring-slate-200/70 backdrop-blur-xl;
+        box-shadow:
+            0 10px 30px rgba(15, 23, 42, 0.08),
+            inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .ios-soft-card {
+        @apply rounded-[26px] border border-white/50 bg-white/70 backdrop-blur-xl ring-1 ring-slate-200/60;
+        box-shadow:
+            0 8px 24px rgba(15, 23, 42, 0.06),
+            inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .ios-pill {
+        @apply rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 ring-1 ring-slate-200/80 backdrop-blur;
+    }
+
+    .ios-input {
+        @apply w-full rounded-[22px] border border-slate-200 bg-white/90 px-4 py-3 text-[15px] text-slate-800 outline-none transition duration-200 placeholder:text-slate-400;
+        box-shadow:
+            inset 0 1px 1px rgba(255,255,255,0.75),
+            0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .ios-input:focus {
+        @apply border-sky-400 bg-white ring-4 ring-sky-100;
+    }
+
+    .ios-button-primary {
+        @apply inline-flex min-h-[52px] items-center justify-center rounded-[22px] px-4 py-3 text-sm font-semibold text-white transition duration-200;
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        box-shadow:
+            0 10px 22px rgba(14, 165, 233, 0.28),
+            inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .ios-button-primary:active {
+        transform: scale(0.985);
+    }
+
+    .ios-button-dark {
+        @apply inline-flex min-h-[50px] items-center justify-center rounded-[20px] bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+    }
+
+    .ios-button-danger {
+        @apply inline-flex min-h-[50px] items-center justify-center rounded-[20px] bg-red-600 px-4 py-3 text-sm font-semibold text-white transition;
+        box-shadow: 0 10px 24px rgba(220, 38, 38, 0.20);
+    }
+
+    .ios-segment {
+        @apply rounded-full bg-slate-100/90 p-1 ring-1 ring-slate-200/80 backdrop-blur;
+    }
+
+    .ios-segment-item {
+        @apply rounded-full px-3 py-1.5 text-xs font-semibold text-slate-600 transition;
+    }
+
+    .ios-segment-item-active {
+        @apply bg-white text-slate-900 shadow-sm;
+    }
+
+    .ios-summary-tile {
+        @apply rounded-[24px] border border-white/10 bg-white/10 p-4 backdrop-blur-xl;
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.18),
+            0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .ios-disclosure {
+        @apply rounded-[26px] border border-white/50 bg-white/75 p-3 ring-1 ring-slate-200/70 backdrop-blur-xl;
+        box-shadow:
+            0 10px 28px rgba(15, 23, 42, 0.06),
+            inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .ios-info-button {
+        @apply inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/90 text-[11px] font-bold text-sky-700 ring-1 ring-sky-200;
+    }
+}
